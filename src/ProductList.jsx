@@ -259,6 +259,12 @@ function ProductList() {
             [product.name]: true
         }))
     }
+    const isDisabled = (plant) => {
+        const isInCart = cartItems.some(item => item.name === plant.name);
+        // Use addedToCart state to determine button disable state
+        const isButtonDisabled = addedToCart[plant.name] || isInCart;
+        return isButtonDisabled;
+    }
     const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
     return (
         <div>
@@ -283,6 +289,8 @@ function ProductList() {
             {!showCart ? (
                 <div className="product-grid">
                     {plantsArray.map((category, index) => (
+
+
                         <div key={index}>
                             <h1><div>{category.category}</div></h1>
                             <div className="product-list">
@@ -291,7 +299,7 @@ function ProductList() {
                                         <img className="product-image" src={plant.image} alt={plant.name} />
                                         <div className="product-title">{plant.name}</div>
                                         {/*Similarly like the above plant.name show other details like description and cost*/}
-                                        <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                                        <button className="product-button" onClick={() => handleAddToCart(plant)} disabled={isDisabled(plant)} >{isDisabled(plant) ? 'Added to Cart' : 'Add to Cart'}</button>
                                     </div>
                                 ))}
                             </div>
