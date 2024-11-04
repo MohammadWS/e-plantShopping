@@ -248,8 +248,8 @@ function ProductList() {
         setShowCart(false); // Hide the cart when navigating to About Us
     };
 
-    const handleContinueShopping = (e) => {
-        e.preventDefault();
+    const handleContinueShopping = () => {
+        // e.preventDefault();
         setShowCart(false);
     };
     const handleAddToCart = (product) => {
@@ -262,8 +262,8 @@ function ProductList() {
     const isDisabled = (plant) => {
         const isInCart = cartItems.some(item => item.name === plant.name);
         // Use addedToCart state to determine button disable state
-        const isButtonDisabled = addedToCart[plant.name] || isInCart;
-        return isButtonDisabled;
+        // const isButtonDisabled = addedToCart[plant.name] || isInCart;
+        return isInCart;
     }
     const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
     return (
